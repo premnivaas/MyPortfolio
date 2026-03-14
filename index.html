@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geethanjali N — Software Developer</title>
+<meta name="description" content="Geethanjali N — Java Web Developer from Coimbatore, Tamil Nadu. Experienced in JSP, Servlets, JDBC, MVC architecture, building secure and scalable web applications.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060610;
+  --surface: #0b0b1a;
+  --card: #10101f;
+  --border: #1a1a2e;
+  --accent: #c084fc;
+  --accent2: #f0abfc;
+  --accent3: #818cf8;
+  --teal: #34d399;
+  --text: #dde1f0;
+  --muted: #6b6b9a;
+  --bright: #f1f0ff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── AMBIENT ── */
+.ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.09; animation: drift 20s ease-in-out infinite alternate; }
+.b1 { width: 700px; height: 700px; background: #c084fc; top: -250px; right: -150px; }
+.b2 { width: 500px; height: 500px; background: #818cf8; bottom: -100px; left: -100px; animation-delay: -9s; }
+.b3 { width: 280px; height: 280px; background: #34d399; top: 45%; left: 40%; animation-delay: -15s; }
+@keyframes drift { 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(40px,60px) scale(1.1);} }
+
+/* ── CURSOR ── */
+.cursor { position: fixed; width: 340px; height: 340px; border-radius: 50%; pointer-events: none; z-index: 2; transform: translate(-50%,-50%); background: radial-gradient(circle, rgba(192,132,252,0.05) 0%, transparent 70%); transition: left 0.1s ease, top 0.1s ease; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 52px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(6,6,16,0.85); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  animation: navIn 0.6s ease both;
+}
+@keyframes navIn { from{transform:translateY(-100%);opacity:0;} to{transform:translateY(0);opacity:1;} }
+.nav-logo { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.2rem; color: var(--bright); letter-spacing: -0.01em; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 30px; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none; font-size: 0.8rem;
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+  transition: color 0.3s; position: relative;
+}
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:1px; background:var(--accent); transform:scaleX(0); transition:transform 0.3s; transform-origin:left; }
+.nav-links a:hover { color: var(--bright); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* ── PAGE ── */
+.page { position: relative; z-index: 1; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 100px 52px; }
+.alt { background: var(--surface); }
+
+/* SHARED SECTION HEADERS */
+.s-tag { display:flex; align-items:center; gap:10px; color:var(--accent); font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; font-weight:600; margin-bottom:16px; }
+.s-tag::before { content:''; width:24px; height:1px; background:var(--accent); }
+.s-title { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,4vw,2.9rem); font-weight:700; color:var(--bright); letter-spacing:-0.02em; margin-bottom:14px; line-height:1.1; }
+.s-sub { font-size:0.94rem; color:var(--muted); max-width:500px; margin-bottom:52px; line-height:1.7; }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal.on { opacity:1; transform:translateY(0); }
+.reveal-l { opacity:0; transform:translateX(-24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal-l.on { opacity:1; transform:translateX(0); }
+
+/* ── HERO ── */
+#hero { min-height:100vh; display:flex; align-items:center; max-width:1100px; margin:0 auto; padding:120px 52px 80px; position:relative; }
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(192,132,252,0.1); border:1px solid rgba(192,132,252,0.25); padding:5px 16px; border-radius:100px; font-size:0.73rem; color:var(--accent); letter-spacing:0.09em; text-transform:uppercase; margin-bottom:30px; animation:fadeUp 0.6s 0.2s ease both; }
+.pulse { width:6px; height:6px; background:var(--teal); border-radius:50%; animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+
+.hero-name { font-family:'Playfair Display',serif; font-size:clamp(3rem,8vw,5.5rem); font-weight:800; letter-spacing:-0.03em; line-height:1.0; color:var(--bright); margin-bottom:6px; animation:fadeUp 0.6s 0.3s ease both; }
+.hero-name .initial { color: var(--accent); }
+.hero-role-line {
+  font-size:clamp(1rem,2.5vw,1.4rem); font-weight:300;
+  color: transparent;
+  background: linear-gradient(120deg, var(--accent2), var(--accent3));
+  -webkit-background-clip: text; background-clip: text;
+  margin-bottom: 22px;
+  animation:fadeUp 0.6s 0.4s ease both;
+  letter-spacing: 0.01em;
+}
+.hero-loc { font-size:0.88rem; color:var(--muted); margin-bottom:28px; animation:fadeUp 0.6s 0.45s ease both; }
+.hero-loc span { color: var(--text); }
+
+.hero-summary { font-size:0.97rem; color:var(--muted); max-width:560px; margin-bottom:40px; line-height:1.8; animation:fadeUp 0.6s 0.5s ease both; }
+.hero-summary strong { color:var(--text); font-weight:500; }
+
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp 0.6s 0.6s ease both; }
+.btn { display:inline-flex; align-items:center; gap:7px; padding:11px 26px; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:0.88rem; font-weight:500; text-decoration:none; cursor:pointer; border:none; transition:all 0.3s ease; }
+.btn-fill { background:linear-gradient(135deg, var(--accent), var(--accent3)); color:#fff; box-shadow:0 0 30px rgba(192,132,252,0.25); }
+.btn-fill:hover { opacity:0.9; box-shadow:0 0 45px rgba(192,132,252,0.4); transform:translateY(-2px); }
+.btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+
+.hero-contacts { display:flex; flex-wrap:wrap; gap:22px; margin-top:46px; animation:fadeUp 0.6s 0.7s ease both; }
+.hlink { display:flex; align-items:center; gap:7px; color:var(--muted); text-decoration:none; font-size:0.82rem; transition:color 0.3s; }
+.hlink:hover { color:var(--accent); }
+.hlink svg { width:14px; height:14px; flex-shrink:0; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+
+.scroll-cue { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--muted); font-size:0.67rem; letter-spacing:0.13em; text-transform:uppercase; animation:fadeUp 1s 1.3s ease both; }
+.scroll-line { width:1px; height:38px; background:linear-gradient(to bottom,var(--accent),transparent); animation:sline 2s ease-in-out infinite; }
+@keyframes sline { 0%{transform:scaleY(0);transform-origin:top;} 50%{transform:scaleY(1);transform-origin:top;} 51%{transform:scaleY(1);transform-origin:bottom;} 100%{transform:scaleY(0);transform-origin:bottom;} }
+
+/* ── STATS ── */
+.stats-row { display:flex; gap:52px; flex-wrap:wrap; }
+.stat-val { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; background:linear-gradient(120deg,var(--accent),var(--accent3)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; margin-bottom:6px; }
+.stat-lbl { font-size:0.78rem; color:var(--muted); }
+
+/* ── SKILLS ── */
+.skills-block { display:flex; flex-direction:column; gap:34px; }
+.cat-label { font-size:0.75rem; font-weight:600; color:var(--accent); letter-spacing:0.13em; text-transform:uppercase; margin-bottom:14px; }
+.pills { display:flex; flex-wrap:wrap; gap:10px; }
+.pill { background:var(--card); border:1px solid var(--border); padding:8px 18px; border-radius:8px; font-size:0.83rem; color:var(--text); font-weight:400; transition:all 0.25s ease; cursor:default; }
+.pill:hover { border-color:var(--accent); color:var(--accent); background:rgba(192,132,252,0.07); transform:translateY(-2px); }
+.pill.v { border-color:rgba(129,140,248,0.2); }
+.pill.v:hover { border-color:var(--accent3); color:var(--accent3); background:rgba(129,140,248,0.08); }
+.pill.t { border-color:rgba(52,211,153,0.2); }
+.pill.t:hover { border-color:var(--teal); color:var(--teal); background:rgba(52,211,153,0.08); }
+
+/* ── EXPERIENCE ── */
+.exp-list { display:flex; flex-direction:column; }
+.exp-item { display:grid; grid-template-columns:200px 1fr; gap:44px; padding:44px 0; border-bottom:1px solid var(--border); }
+.exp-item:last-child { border-bottom:none; }
+.exp-period { font-size:0.77rem; color:var(--teal); font-weight:500; margin-bottom:4px; line-height:1.5; }
+.exp-loc { font-size:0.74rem; color:var(--muted); margin-bottom:12px; }
+.exp-badge { display:inline-block; background:rgba(192,132,252,0.1); border:1px solid rgba(192,132,252,0.22); padding:4px 12px; border-radius:6px; font-size:0.7rem; color:var(--accent); letter-spacing:0.04em; }
+.exp-role { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--bright); margin-bottom:4px; }
+.exp-co { font-size:0.87rem; color:var(--muted); margin-bottom:18px; }
+.exp-co a { color:var(--accent); text-decoration:none; }
+.exp-pts { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.exp-pts li { font-size:0.88rem; color:var(--muted); padding-left:18px; position:relative; line-height:1.65; }
+.exp-pts li::before { content:'▸'; position:absolute; left:0; color:var(--accent); font-size:0.68rem; top:4px; }
+.exp-pts li strong { color:var(--text); font-weight:500; }
+.exp-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.exp-tag { background:transparent; border:1px solid var(--border); color:var(--muted); font-size:0.7rem; padding:3px 10px; border-radius:100px; }
+
+/* ── PROJECTS ── */
+.proj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+.proj-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:32px; position:relative; overflow:hidden; transition:all 0.38s ease; display:flex; flex-direction:column; }
+.proj-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--accent),var(--accent3),transparent); opacity:0; transition:opacity 0.38s; }
+.proj-card:hover::before { opacity:1; }
+.proj-card:hover { border-color:rgba(192,132,252,0.3); transform:translateY(-6px); box-shadow:0 28px 70px rgba(0,0,0,0.5); }
+.proj-num { font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; color:var(--border); line-height:1; margin-bottom:18px; transition:color 0.3s; }
+.proj-card:hover .proj-num { color:rgba(192,132,252,0.15); }
+.proj-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--bright); margin-bottom:12px; }
+.proj-desc { font-size:0.86rem; color:var(--muted); line-height:1.7; flex:1; margin-bottom:22px; }
+.proj-tags { display:flex; flex-wrap:wrap; gap:7px; }
+.proj-tag { background:rgba(192,132,252,0.08); border:1px solid rgba(192,132,252,0.18); color:var(--accent); font-size:0.69rem; padding:2px 9px; border-radius:100px; }
+
+/* ── EDUCATION ── */
+.edu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
+.edu-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px; transition:all 0.3s; }
+.edu-card:hover { border-color:var(--accent); transform:translateY(-3px); }
+.edu-icon { font-size:1.7rem; margin-bottom:14px; }
+.edu-deg { font-family:'Playfair Display',serif; font-weight:700; font-size:0.97rem; color:var(--bright); margin-bottom:5px; }
+.edu-school { font-size:0.82rem; color:var(--muted); margin-bottom:4px; }
+.edu-yr { font-size:0.75rem; color:var(--teal); }
+
+/* ── CONTACT ── */
+#contact { text-align:center; }
+.contact-box { background:var(--card); border:1px solid var(--border); border-radius:22px; padding:64px 52px; max-width:620px; margin:0 auto; position:relative; overflow:hidden; }
+.contact-box::before { content:''; position:absolute; top:-1px; left:12%; right:12%; height:2px; background:linear-gradient(to right,transparent,var(--accent),var(--accent3),transparent); }
+.c-tagline { font-size:0.9rem; color:var(--muted); margin-bottom:12px; }
+.c-email { font-family:'Playfair Display',serif; font-size:clamp(1rem,3vw,1.5rem); font-weight:700; color:var(--bright); margin:10px 0 6px; }
+.c-phone { font-size:0.9rem; color:var(--muted); }
+.c-loc { font-size:0.82rem; color:var(--muted); margin-bottom:38px; }
+.c-btns { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+
+/* ── FOOTER ── */
+footer { text-align:center; padding:36px 52px; color:var(--muted); font-size:0.78rem; border-top:1px solid var(--border); position:relative; z-index:1; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  #hero,.wrap{padding:100px 22px 60px;}
+  .exp-item{grid-template-columns:1fr;gap:8px;}
+  .proj-grid{grid-template-columns:1fr;}
+  .contact-box{padding:40px 22px;}
+  .stats-row{gap:28px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="ambient">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+
+<nav>
+  <div class="nav-logo">Geethan<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+<!-- ══ HERO ══ -->
+<div style="position:relative;">
+<div id="hero">
+  <div>
+    <div class="hero-badge"><span class="pulse"></span>Open to Software Developer Roles</div>
+    <h1 class="hero-name">Geethanjali<span class="initial"> N</span></h1>
+    <p class="hero-role-line">Software Developer</p>
+    <p class="hero-loc"><span>Java Web Developer</span> · Coimbatore, Tamil Nadu, India</p>
+    <p class="hero-summary">
+      Software Developer specializing in <strong>Java web development</strong> with experience building
+      secure and scalable applications using <strong>JSP, Servlets, JDBC, and MVC architecture</strong>.
+      Passionate about developing reliable backend systems and contributing across the full software development lifecycle.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-fill">View My Work</a>
+      <a href="#contact" class="btn btn-ghost">Hire Me</a>
+      <a href="https://github.com/geethanjali-n" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+    <div class="hero-contacts">
+      <a href="mailto:geethanjali.nagarajkumar@gmail.com" class="hlink">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        geethanjali.nagarajkumar@gmail.com
+      </a>
+      <a href="tel:+919344175537" class="hlink">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .98h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        +91 93441 75537
+      </a>
+      <a href="https://linkedin.com/in/geethanjali-n" target="_blank" class="hlink">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM6.62 20.45H4.07V9h2.55v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/geethanjali-n" target="_blank" class="hlink">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0112 5.8c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</div>
+<div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</div>
+
+<!-- ══ STATS ══ -->
+<div class="alt">
+<div class="wrap reveal">
+  <div class="stats-row">
+    <div><div class="stat-val">1.5+</div><div class="stat-lbl">Years Experience</div></div>
+    <div><div class="stat-val">4+</div><div class="stat-lbl">Projects Built</div></div>
+    <div><div class="stat-val">Elite</div><div class="stat-lbl">NPTEL Certification</div></div>
+    <div><div class="stat-val">2</div><div class="stat-lbl">Companies Worked</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ══ SKILLS ══ -->
+<div id="skills">
+<div class="wrap">
+  <div class="s-tag">Technical Expertise</div>
+  <h2 class="s-title reveal">Skills &amp; Technologies</h2>
+  <p class="s-sub reveal">A focused skill set built through real enterprise and freelance projects — from robust backend logic to clean frontend interfaces.</p>
+
+  <div class="skills-block">
+    <div class="reveal">
+      <div class="cat-label">Backend Development</div>
+      <div class="pills">
+        <span class="pill">Java</span>
+        <span class="pill">JSP</span>
+        <span class="pill">Servlets</span>
+        <span class="pill">JDBC</span>
+        <span class="pill">MVC Architecture</span>
+        <span class="pill">Core Java</span>
+        <span class="pill">OOP</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="cat-label">Frontend Development</div>
+      <div class="pills">
+        <span class="pill v">HTML5</span>
+        <span class="pill v">CSS3</span>
+        <span class="pill v">JavaScript</span>
+        <span class="pill v">Responsive Design</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="cat-label">Database</div>
+      <div class="pills">
+        <span class="pill">MySQL</span>
+        <span class="pill">SQL Query Optimization</span>
+        <span class="pill">Database Design</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="cat-label">Tools &amp; Platforms</div>
+      <div class="pills">
+        <span class="pill t">Eclipse IDE</span>
+        <span class="pill t">Apache Tomcat</span>
+        <span class="pill t">Git</span>
+        <span class="pill t">GitHub</span>
+        <span class="pill t">SDLC</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ EXPERIENCE ══ -->
+<div class="alt" id="experience">
+<div class="wrap">
+  <div class="s-tag">Career</div>
+  <h2 class="s-title reveal">Work Experience</h2>
+  <p class="s-sub reveal">Hands-on experience from enterprise software development to building full-stack Java web applications across different organizations.</p>
+
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-period">May 2025 – Present</div>
+        <div class="exp-loc">Tamil Nadu, India</div>
+        <div class="exp-badge">Current Role</div>
+      </div>
+      <div>
+        <div class="exp-role">Software Developer</div>
+        <div class="exp-co">Adela Software &amp; Services Pvt Ltd</div>
+        <ul class="exp-pts">
+          <li>Developing <strong>enterprise solutions</strong> using Java core principles, contributing to production-grade application modules.</li>
+          <li>Designing <strong>backend modules</strong> for scalable, maintainable application architecture.</li>
+          <li>Contributing across the <strong>full SDLC</strong> — from design and development through to deployment and maintenance.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Java</span><span class="exp-tag">Enterprise</span>
+          <span class="exp-tag">Backend</span><span class="exp-tag">SDLC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-period">Aug 2024 – Apr 2025</div>
+        <div class="exp-loc">Trichy, India</div>
+        <div class="exp-badge">Greensoft Groups</div>
+      </div>
+      <div>
+        <div class="exp-role">Java Web Developer</div>
+        <div class="exp-co">Greensoft Groups</div>
+        <ul class="exp-pts">
+          <li>Developed <strong>dynamic web applications</strong> using JSP, Servlets, and JDBC for real-time data processing.</li>
+          <li>Implemented <strong>MVC architecture</strong> patterns for scalable and maintainable application design.</li>
+          <li>Optimized <strong>SQL queries and database performance</strong>, reducing load times and improving system responsiveness.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Java</span><span class="exp-tag">JSP</span>
+          <span class="exp-tag">Servlets</span><span class="exp-tag">JDBC</span>
+          <span class="exp-tag">MySQL</span><span class="exp-tag">MVC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ PROJECTS ══ -->
+<div id="projects">
+<div class="wrap">
+  <div class="s-tag">Portfolio</div>
+  <h2 class="s-title reveal">Featured Projects</h2>
+  <p class="s-sub reveal">Selected projects showcasing full-stack Java development, security-focused design, and real-world application delivery.</p>
+
+  <div class="proj-grid">
+
+    <div class="proj-card reveal">
+      <div class="proj-num">01</div>
+      <div class="proj-title">AI Smart FAQ System</div>
+      <div class="proj-desc">AI-powered FAQ platform with chatbot integration, admin dashboard, and intelligent search for automated question resolution. Built to reduce manual support load and improve response accuracy.</div>
+      <div class="proj-tags">
+        <span class="proj-tag">Java</span><span class="proj-tag">JSP</span>
+        <span class="proj-tag">Servlets</span><span class="proj-tag">MySQL</span>
+        <span class="proj-tag">AI Integration</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" style="transition-delay:0.1s">
+      <div class="proj-num">02</div>
+      <div class="proj-title">Secure File Access Platform</div>
+      <div class="proj-desc">Security-focused file sharing system featuring decoy defense mechanisms, multi-layer authentication keys, and controlled file access management to prevent unauthorized data exposure.</div>
+      <div class="proj-tags">
+        <span class="proj-tag">Java</span><span class="proj-tag">Servlets</span>
+        <span class="proj-tag">Security</span><span class="proj-tag">Authentication</span>
+        <span class="proj-tag">MySQL</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" style="transition-delay:0.2s">
+      <div class="proj-num">03</div>
+      <div class="proj-title">Crime Reporting &amp; SOS System</div>
+      <div class="proj-desc">Real-time emergency alert and crime reporting system with location services integration and automated notifications. Designed for fast alert delivery and anonymous reporting workflows.</div>
+      <div class="proj-tags">
+        <span class="proj-tag">Java</span><span class="proj-tag">JSP</span>
+        <span class="proj-tag">JavaMail API</span><span class="proj-tag">Google Maps</span>
+        <span class="proj-tag">MySQL</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ══ EDUCATION ══ -->
+<div class="alt" id="education">
+<div class="wrap">
+  <div class="s-tag">Background</div>
+  <h2 class="s-title reveal">Education &amp; Certifications</h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-deg">Computer Science Degree</div>
+      <div class="edu-school">Tamil Nadu, India</div>
+      <div class="edu-yr">Completed 2024</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏆</div>
+      <div class="edu-deg">NPTEL Certification — Elite</div>
+      <div class="edu-school">National Programme on Technology Enhanced Learning</div>
+      <div class="edu-yr">Elite Level Achievement</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">☕</div>
+      <div class="edu-deg">Java Web Development</div>
+      <div class="edu-school">Greensoft Groups Training</div>
+      <div class="edu-yr">Aug 2024 – Apr 2025</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div id="contact">
+<div class="wrap" style="text-align:center;">
+  <div class="s-tag" style="justify-content:center;">Get In Touch</div>
+  <h2 class="s-title reveal">Let's Work Together</h2>
+  <div class="contact-box reveal">
+    <p class="c-tagline">Looking for a dedicated Software Developer? I'm actively open to new opportunities.</p>
+    <div class="c-email">geethanjali.nagarajkumar@gmail.com</div>
+    <div class="c-phone">+91 93441 75537</div>
+    <div class="c-loc">📍 Tamil Nadu, India</div>
+    <div class="c-btns">
+      <a href="mailto:geethanjali.nagarajkumar@gmail.com" class="btn btn-fill">Send Email</a>
+      <a href="https://linkedin.com/in/geethanjali-n" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="https://github.com/geethanjali-n" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /page -->
+
+<footer>Built by Geethanjali N &nbsp;·&nbsp; Software Developer &nbsp;·&nbsp; Tamil Nadu, India</footer>
+
+<script>
+  document.addEventListener('mousemove', e => {
+    const c = document.getElementById('cur');
+    c.style.left = e.clientX + 'px';
+    c.style.top = e.clientY + 'px';
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal, .reveal-l').forEach(el => obs.observe(el));
+
+  const navAs = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    navAs.forEach(a => {
+      const id = a.getAttribute('href').replace('#','');
+      const sec = document.getElementById(id);
+      if (sec) {
+        const top = sec.offsetTop - 200;
+        const bot = top + sec.offsetHeight;
+        a.style.color = window.scrollY >= top && window.scrollY < bot ? 'var(--bright)' : '';
+      }
+    });
+  });
+</script>
+</body>
+</html>
